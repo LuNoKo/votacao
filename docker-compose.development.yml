@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  database:
+    container_name: database
+    image: postgres:16-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=votacao
+      - POSTGRES_PASSWORD=votacao
+      - POSTGRES_db=votacao
+    volumes:
+      - ./data/database:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
