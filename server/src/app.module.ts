@@ -1,10 +1,13 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './resources/user/user.module';
 import { SubjectModule } from './resources/subject/subject.module';
 import { VotesModule } from './resources/votes/votes.module';
 import { AuthModule } from './resources/auth/auth.module';
+import { APP_GUARD } from '@nestjs/core';
+import { RolesGuard } from './common/guard/role.guard';
 import { JwtModule } from '@nestjs/jwt';
 
 @Module({
@@ -31,6 +34,11 @@ import { JwtModule } from '@nestjs/jwt';
   ],
   controllers: [],
   providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    },
   ],
 })
 export class AppModule {}
