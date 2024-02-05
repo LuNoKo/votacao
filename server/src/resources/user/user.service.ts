@@ -1,0 +1,132 @@
+import {
+  BadRequestException,
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
+import { UserEntity } from './entity/user.entity';
+import { CreateUserDto } from './dto/createUser.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { UpdateUserPasswordDto } from './dto/updateUserPassword.dto';
+import { UpdateUserDto } from './dto/updateUser.dto';
+import {
+  createPasswordHashed,
+  validatePassword,
+} from '../../common/utils/password';
+
+@Injectable()
+export class UserService {
+  constructor(
+    @InjectRepository(UserEntity)
+    private readonly userRepository: Repository<UserEntity>,
+  ) {}
+
+  async CreateUser(createUser: CreateUserDto): Promise<UserEntity> {
+    const userExist = await this.GetOneUserByCpf(createUser.cpf).catch(
+      () => undefined,
+    );
+
+    if (userExist) {
+      throw new ConflictException(`Usuário já cadastrado`);
+    }
+
+    const passwordHashed = await createPasswordHashed(createUser.password);
+
+    return this.userRepository.save({
+      ...createUser,
+      password: passwordHashed,
+    });
+  }
+
+  async GetAllUsers(): Promise<UserEntity[]> {
+    const users = await this.userRepository.find({
+      where: { active: true },
+      order: { name: 'ASC' },
+    });
+
+    if (!users || users.length === 0) {
+      throw new NotFoundException('Usuários não encontrados');
+    }
+
+    return users;
+  }
+
+  async GetOneUserById(userId: string): Promise<UserEntity> {
+    const user = await this.userRepository.findOne({
+      where: { id: userId, active: true },
+    });
+
+    if (!user) {
+      throw new NotFoundException('Usuário não encontrado');
+    }
+
+    return user;
+  }
+
+  async GetOneUserByCpf(cpf: string): Promise<UserEntity> {
+    const user = await this.userRepository.findOne({
+      where: { cpf, active: true },
+    });
+
+    if (!user) {
+      throw new NotFoundException(`Usuário não encontrado para o cpf ${cpf}`);
+    }
+
+    return user;
+  }
+
+  async UpdateUser(
+    updateUser: UpdateUserDto,
+    userId: string,
+  ): Promise<UserEntity> {
+    const user = await this.GetOneUserById(userId);
+
+    if (!user) {
+      throw new NotFoundException('Usuário não encontrado');
+    }
+
+    return this.userRepository.save({
+      ...user,
+      ...updateUser,
+    });
+  }
+
+  async UpdatePasswordUser(
+    updatePasswordDTO: UpdateUserPasswordDto,
+    userId: string,
+  ): Promise<UserEntity> {
+    const user = await this.GetOneUserById(userId);
+
+    const passwordHashed = await createPasswordHashed(
+      updatePasswordDTO.newPassword,
+    );
+
+    const isMatch = await validatePassword(
+      updatePasswordDTO.lastPassword,
+      user.password || '',
+    );
+
+    if (!isMatch) {
+      throw new BadRequestException('Ultima senha inválida');
+    }
+
+    return this.userRepository.save({
+      ...user,
+      password: passwordHashed,
+    });
+  }
+
+  async delete(userId: string) {
+    const user = await this.GetOneUserById(userId);
+
+    if (!user) {
+      throw new NotFoundException('Usuário não encontrado');
+    }
+
+    return this.userRepository.save({
+      ...user,
+      active: false,
+    });
+  }
+}

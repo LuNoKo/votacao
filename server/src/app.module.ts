@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserModule } from './resources/user/user.module';
 
 @Module({
   imports: [
@@ -17,6 +19,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       migrationsRun: true,
       verboseRetryLog: true,
     }),
+    UserModule,
   ],
   controllers: [],
   providers: [
