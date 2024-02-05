@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './resources/user/user.module';
 import { SubjectModule } from './resources/subject/subject.module';
+import { VotesModule } from './resources/votes/votes.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { SubjectModule } from './resources/subject/subject.module';
     }),
     UserModule,
     SubjectModule,
+    VotesModule,
   ],
   controllers: [],
   providers: [
