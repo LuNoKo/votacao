@@ -4,6 +4,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './resources/user/user.module';
 import { SubjectModule } from './resources/subject/subject.module';
 import { VotesModule } from './resources/votes/votes.module';
+import { AuthModule } from './resources/auth/auth.module';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -24,6 +26,8 @@ import { VotesModule } from './resources/votes/votes.module';
     UserModule,
     SubjectModule,
     VotesModule,
+    AuthModule,
+    JwtModule,
   ],
   controllers: [],
   providers: [
