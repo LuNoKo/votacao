@@ -10,7 +10,7 @@ import { SubjectService } from '../../subject/subject.service';
 import { subjectEntityMock } from '../../subject/__mocks__/subject.mock';
 import { JwtService } from '@nestjs/jwt';
 import { jwtMock } from '../../auth/__mocks__/jwt.mock';
-import { ConflictException, NotFoundException } from '@nestjs/common';
+import { ConflictException } from '@nestjs/common';
 import { createVoteMock } from '../__mocks__/createVote.mock';
 
 describe('VotesService', () => {
@@ -29,6 +29,7 @@ describe('VotesService', () => {
             findOne: jest.fn().mockResolvedValue(voteEntityMock),
             save: jest.fn().mockResolvedValue(voteEntityMock),
             HasUserVotedBySubject: jest.fn().mockResolvedValue(true),
+            count: jest.fn().mockResolvedValue(10),
           },
         },
         {
@@ -73,52 +74,40 @@ describe('VotesService', () => {
         votesService.CreateVote(createVoteMock, userEntityMock.id),
       ).rejects.toThrow(new ConflictException('Usuário já votou nesta pauta'));
     });
-    // TODO
-    it('should return error if user not exist in CreateVote', async () => {
-      // jest.spyOn(userService, 'GetOneUserById').mockRejectedValue(undefined);
-      // expect(jest.spyOn(userService, 'GetOneUserById')).toHaveBeenCalledWith(
-      //   '00000000-0000-0000-0000-000000000001',
-      // );
-      // expect(
-      //   votesService.CreateVote(
-      //     createVoteMock,
-      //     '00000000-0000-0000-0000-000000000001',
-      //   ),
-      // ).rejects.toThrow(
-      //   new NotFoundException('Pauta ou usuário não encontrado'),
-      // );
-    });
-    // TODO
-    it('should return error if subject not exist in CreateVote', async () => {
-      // jest
-      //   .spyOn(subjectService, 'GetOneSubjectById')
-      //   .mockRejectedValue(undefined);
-      // expect(
-      //   votesService.CreateVote(createVoteMock, userEntityMock.id),
-      // ).rejects.toThrow();
+    it('should return vote in CreateVote', async () => {
+      jest.spyOn(votesRepository, 'findOne').mockResolvedValue(null);
+      expect(
+        await votesService.CreateVote(createVoteMock, subjectEntityMock.id),
+      ).toEqual(voteEntityMock);
     });
   });
 
   describe('HasUserVotedBySubject', () => {
-    // TODO
-    it('should return false if user already voted in HasUserVotedBySubject', async () => {});
-    // TODO
-    it('should return true if user not voted yet in HasUserVotedBySubject', async () => {});
-    // TODO
-    it('should return error if user not exist in HasUserVotedBySubject', async () => {
-      // jest.spyOn(userService, 'GetOneUserById').mockRejectedValue(undefined);
-      // expect(
-      //   await votesService.HasUserVotedBySubject(
-      //     userEntityMock.id,
-      //     subjectEntityMock.id,
-      //   ),
-      // ).rejects.toThrow(
-      //   new NotFoundException('Pauta ou usuário não encontrado'),
-      // );
+    it('should return false if user already voted in HasUserVotedBySubject', async () => {
+      jest.spyOn(votesRepository, 'findOne').mockResolvedValue(null);
+      expect(
+        await votesService.HasUserVotedBySubject(
+          userEntityMock.id,
+          subjectEntityMock.id,
+        ),
+      ).toEqual(false);
     });
-    // TODO
-    it('should return error if subject not exist in HasUserVotedBySubject', async () => {
-      return true;
+    it('should return true if user not voted yet in HasUserVotedBySubject', async () => {
+      expect(
+        await votesService.HasUserVotedBySubject(
+          userEntityMock.id,
+          subjectEntityMock.id,
+        ),
+      ).toEqual(true);
+    });
+  });
+
+  describe('Result', () => {
+    it('should return result in HasUserVotedBySubject', async () => {
+      expect(await votesService.Result(subjectEntityMock.id)).toEqual({
+        votesForNo: 10,
+        votesForYes: 10,
+      });
     });
   });
 });
