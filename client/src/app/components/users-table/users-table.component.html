@@ -1,0 +1,27 @@
+<div *ngIf="allUsers.length > 0; else noUsers">
+  <table class="table table-light table-hover">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Tipo</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let user of allUsers">
+      <tr>
+        <td>{{ user.name }}</td>
+        <td>{{ getUserTypeDescription(user.type) }}</td>
+        <td>
+          <app-users-actions-buttons></app-users-actions-buttons>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<ng-template #noUsers>
+  <div
+    class="col-12 d-flex flex-column justify-content-center text-center mx-auto pt-5"
+  >
+    <h3 class="text-xl font-bold text-zinc-900">Não há usuários cadastrados</h3>
+  </div>
+</ng-template>
