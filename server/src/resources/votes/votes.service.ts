@@ -58,9 +58,23 @@ export class VotesService {
     }
 
     const hasUserVoted = await this.voteRepository.findOne({
-      where: { user, subject },
+      where: { user: { id: user.id }, subject: { id: subject.id } },
     });
 
     return !!hasUserVoted;
+  }
+
+  async Result(subjectId: string) {
+    await this.subjectService.GetOneSubjectById(subjectId);
+
+    let votesForYes = await this.voteRepository.count({
+      where: { subject: { id: subjectId }, answer: true },
+    });
+
+    let votesForNo = await this.voteRepository.count({
+      where: { subject: { id: subjectId }, answer: false },
+    });
+
+    return { votesForYes, votesForNo };
   }
 }
