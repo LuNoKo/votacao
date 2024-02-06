@@ -1,0 +1,60 @@
+<div class="flex flex-col gap-6 py-6">
+  <div class="card">
+    <div class="card-body">
+      <p class="card-subtitle">
+        <small class="text-muted">{{
+          getCategoryDescription(subject.category)
+        }}</small>
+      </p>
+      <h4 class="card-title ms-2">{{ subject.title }}</h4>
+      <p class="card-subtitle">
+        <small class="text-muted fw-bold"
+          >Seção termina: {{ activateUntilTranslated }}</small
+        >
+      </p>
+      <div class="card-text pt-4">
+        <div>
+          <p><b>Texto da pauta:</b></p>
+          <p class="mx-2">{{ subject.description }}</p>
+        </div>
+
+        <div class="pt-3">
+          @if (isUserAuthenticated && hasUserVoted && !subjectVoteTimeEnded) {
+          <p class="fw-bold text-center">
+            Você já votou nesta pauta, aguarde o resultado após a final da seção
+          </p>
+          } @else if (isUserAuthenticated && !hasUserVoted &&
+          !subjectVoteTimeEnded && showButtons) {
+          <p class="fw-bold text-center">Vote clicando abaixo:</p>
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <button
+                type="button"
+                class="btn btn-success btn-lg w-75 fw-bold mx-auto d-flex justify-content-center"
+                (click)="vote(true)"
+              >
+                A favor
+              </button>
+            </div>
+            <div class="col-12 col-md-6 pt-3 pt-md-0">
+              <button
+                type="button"
+                class="btn btn-danger btn-lg w-75 fw-bold mx-auto d-flex justify-content-center"
+                (click)="vote(false)"
+              >
+                Contra
+              </button>
+            </div>
+          </div>
+          }@else if (isUserAuthenticated && subjectVoteTimeEnded) {
+          <app-subject-result [subjectId]="subject.id"></app-subject-result>
+          }@else if (!isUserAuthenticated) {
+          <a routerLink="/login" class="btn btn-primary w-100" type="submit"
+            >Faça o login para
+            {{ subjectVoteTimeEnded ? "ver o resultado" : "votar" }} </a
+          >}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
