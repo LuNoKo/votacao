@@ -16,6 +16,7 @@ import {
   updatePasswordInvalidMock,
   updatePasswordMock,
 } from '../__mocks__/updateUserPassword.mock';
+import { registerUserMock } from '../__mocks__/registerUser.mock';
 
 describe('UserService', () => {
   let service: UserService;
@@ -176,6 +177,22 @@ describe('UserService', () => {
       expect(
         service.UpdatePasswordUser(updatePasswordMock, userEntityMock.id),
       ).rejects.toThrow(new NotFoundException('Usuário não encontrado'));
+    });
+  });
+
+  describe('RegisterUser', () => {
+    it('should return user if user not exist in RegisterUser', async () => {
+      jest.spyOn(userRepository, 'findOne').mockResolvedValue(null);
+
+      const user = await service.RegisterUser(registerUserMock);
+
+      expect(user).toEqual(userEntityMock);
+    });
+
+    it('should return error if user exist in RegisterUser', async () => {
+      expect(service.RegisterUser(registerUserMock)).rejects.toThrow(
+        new ConflictException(`Usuário já cadastrado`),
+      );
     });
   });
 });
