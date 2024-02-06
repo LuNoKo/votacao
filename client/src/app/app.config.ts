@@ -7,9 +7,11 @@ import {
   withFetch,
   withInterceptors,
 } from '@angular/common/http';
+import { AuthInterceptor } from './interceptors/auth/auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
+    provideHttpClient(withFetch(), withInterceptors([AuthInterceptor])),
   ],
 };

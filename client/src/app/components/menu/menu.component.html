@@ -1,0 +1,39 @@
+<nav
+  class="navbar navbar-expand-lg bg-dark border-bottom border-body"
+  data-bs-theme="dark"
+>
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/">Vote.<b>Aqui</b></a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      (click)="navbarCollapsed = !navbarCollapsed"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div
+      class="navbar-collapse collapse text-center text-md-start"
+      [ngClass]="{ show: navbarCollapsed }"
+      id="collapse"
+    >
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li *ngIf="showAdminComponents" class="nav-item">
+          <a class="nav-link" routerLink="/users">Usuários</a>
+        </li>
+      </ul>
+      @if(isUserAuthenticated){
+      <span class="text-light align-middle px-4 text-center d-none d-md-block"
+        >Olá {{ firtNameOfUserAuthenticated }}</span
+      >
+      <a (click)="logout()" class="btn btn-secondary" type="submit">Logout</a>
+      }@else{
+      <a
+        *ngIf="!isUserAuthenticated"
+        routerLink="/login"
+        class="btn btn-primary"
+        type="submit"
+        >Login</a
+      >}
+    </div>
+  </div>
+</nav>
