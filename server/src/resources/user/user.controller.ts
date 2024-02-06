@@ -19,9 +19,9 @@ import { UpdateUserDto } from './dto/updateUser.dto';
 import { UpdateUserPasswordDto } from './dto/updateUserPassword.dto';
 import { UserId } from '../../common/decorators/userId.decorator';
 import { ReturnAllUserDto } from './dto/returnAllUsers.dto';
+import { RegisterUserDto } from './dto/RegisterUserDto.dto';
 
 @Controller('user')
-@Roles(UserTypeEnum.ADMIN)
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
@@ -30,6 +30,16 @@ export class UserController {
   @UsePipes(ValidationPipe)
   async CreateUser(@Body() createUser: CreateUserDto): Promise<ReturnUserDto> {
     return new ReturnUserDto(await this.userService.CreateUser(createUser));
+  }
+
+  @Post('register')
+  @UsePipes(ValidationPipe)
+  async RegisterUser(
+    @Body() registerUserDto: RegisterUserDto,
+  ): Promise<ReturnUserDto> {
+    return new ReturnUserDto(
+      await this.userService.RegisterUser(registerUserDto),
+    );
   }
 
   @Get()

@@ -14,6 +14,8 @@ import {
   createPasswordHashed,
   validatePassword,
 } from '../../common/utils/password';
+import { RegisterUserDto } from './dto/RegisterUserDto.dto';
+import { UserTypeEnum } from './enum/userType.enum';
 
 @Injectable()
 export class UserService {
@@ -35,6 +37,24 @@ export class UserService {
 
     return this.userRepository.save({
       ...createUser,
+      password: passwordHashed,
+    });
+  }
+
+  async RegisterUser(registerUserDto: RegisterUserDto): Promise<UserEntity> {
+    const userExist = await this.GetOneUserByCpf(registerUserDto.cpf).catch(
+      () => undefined,
+    );
+
+    if (userExist) {
+      throw new ConflictException(`Usuário já cadastrado`);
+    }
+
+    const passwordHashed = await createPasswordHashed(registerUserDto.password);
+
+    return this.userRepository.save({
+      ...registerUserDto,
+      type: UserTypeEnum.USER,
       password: passwordHashed,
     });
   }
