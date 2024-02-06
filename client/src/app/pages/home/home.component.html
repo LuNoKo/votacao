@@ -1,0 +1,79 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="pt-6 flex mb-5">
+        <form action="">
+          <select (change)="search($event)" class="form-select">
+            <option value="">Selecione</option>
+            <ng-container *ngFor="let category of allCategories">
+              <option [value]="category.value">
+                {{ category.description }}
+              </option>
+            </ng-container>
+          </select>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <a
+        *ngIf="showAdminComponents"
+        routerLink="/create"
+        class="btn btn-primary btn-lg mx-auto d-flex justify-content-center"
+        >Criar nova pauta</a
+      >
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div *ngIf="allSubjects.length > 0; else noSubjects">
+        <div class="flex flex-col gap-6 py-6" *ngFor="let subject of subjects">
+          <div class="card mt-4">
+            <div class="card-body">
+              <p class="card-subtitle">
+                <small class="text-muted">{{
+                  getCategoryDescription(subject.category)
+                }}</small>
+              </p>
+              <h4 class="card-title">{{ subject.title }}</h4>
+              <p class="card-subtitle">
+                <small class="text-muted fw-bold"
+                  >Seção termina:
+                  {{ activateUntilTranslated(subject.activeUntil) }}</small
+                >
+              </p>
+            </div>
+            <a
+              [routerLink]="['/subject', subject.id]"
+              [ngClass]="{
+                'btn-secondary': subjectVoteTimeEnded(subject.activeUntil),
+                'btn-primary': !subjectVoteTimeEnded(subject.activeUntil)
+              }"
+              class="btn btn-card-botton btn-secondary fw-bold"
+              style="
+                border-radius: 0 0 var(--bs-border-radius)
+                  var(--bs-border-radius);
+              "
+              >{{
+                subjectVoteTimeEnded(subject.activeUntil)
+                  ? "Ver resultados"
+                  : "Votar"
+              }}</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <ng-template #noSubjects>
+        <div
+          class="col-12 d-flex flex-column justify-content-center text-center mx-auto pt-5"
+        >
+          <h3 class="text-xl font-bold text-zinc-900">
+            Não há pautas ativas no momento
+          </h3>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>
