@@ -5,7 +5,7 @@ export class CreateTableSubject1706872284878 implements MigrationInterface {
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(
-      `CREATE TYPE "public"."subject_category_enum" AS ENUM('GAMES', 'POLICY', 'TRAFFIC', 'FINANCE', 'SCHOOL')`,
+      `CREATE TYPE "public"."subject_category_enum" AS ENUM('GAMES', 'POLICY', 'TRAFFIC', 'FINANCE', 'EDUCATION')`,
     );
     await queryRunner.query(
       `CREATE TABLE "subject" (

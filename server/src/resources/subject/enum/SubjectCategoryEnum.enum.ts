@@ -3,5 +3,5 @@ export enum SubjectCategoryEnum {
   POLICY = 'POLICY',
   TRAFFIC = 'TRAFFIC',
   FINANCE = 'FINANCE',
-  SCHOOL = 'SCHOOL',
+  EDUCATION = 'EDUCATION',
 }
