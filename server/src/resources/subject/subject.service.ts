@@ -3,7 +3,6 @@ import { Repository } from 'typeorm';
 import { SubjectEntity } from './entity/subject.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateSubjectDto } from './dto/createSubject.dto';
-import { NotFoundError } from 'rxjs';
 
 @Injectable()
 export class SubjectService {
@@ -19,7 +18,9 @@ export class SubjectService {
   }
 
   async GetAllSubjects(): Promise<SubjectEntity[]> {
-    return this.subjectRepository.find();
+    return this.subjectRepository.find({
+      order: { activeUntil: 'DESC' },
+    });
   }
 
   async GetOneSubjectById(subjectId: string): Promise<SubjectEntity> {
@@ -43,8 +44,4 @@ export class SubjectService {
     }
     return subject;
   }
-
-  // UPDATE
-
-  // DELETE
 }
