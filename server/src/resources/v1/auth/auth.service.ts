@@ -35,4 +35,13 @@ export class AuthService {
       user: new LoginPayloadDto(user),
     };
   }
+
+  async revalidate(loginPayload: LoginPayloadDto): Promise<ReturnLoginDto> {
+    return {
+      accessToken: this.jwtService.sign({
+        ...loginPayload,
+      }),
+      user: { ...loginPayload },
+    };
+  }
 }

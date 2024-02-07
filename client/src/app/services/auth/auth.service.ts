@@ -8,7 +8,7 @@ import { ToastService } from '../toast/toast.service';
   providedIn: 'root',
 })
 export class AuthService {
-  private serverUrl = `${environment.serverUrlV1}`;
+  private serverUrl = `${environment.serverUrlV1}/auth`;
 
   private tokenSubject = new BehaviorSubject<string>('');
   private userSubject = new BehaviorSubject<any>(null);
@@ -30,6 +30,7 @@ export class AuthService {
     if (token && user) {
       this.tokenSubject.next(token);
       this.userSubject.next(JSON.parse(user));
+      this.revalidate().subscribe();
     }
   }
 
@@ -52,38 +53,36 @@ export class AuthService {
   }
 
   login(cpf: string, password: string): Observable<any> {
-    return this.httpClient
-      .post(`${this.serverUrl}/auth`, { cpf, password })
-      .pipe(
-        map((response: any) => {
-          this.setLocalStorage(response.accessToken, response.user);
-          this.tokenSubject.next(response.accessToken);
-          this.userSubject.next(response.user);
+    return this.httpClient.post(`${this.serverUrl}`, { cpf, password }).pipe(
+      map((response: any) => {
+        this.setLocalStorage(response.accessToken, response.user);
+        this.tokenSubject.next(response.accessToken);
+        this.userSubject.next(response.user);
 
-          this.toastService.show({
-            message: 'Login realizado com sucesso!',
-            type: 'success',
-          });
+        this.toastService.show({
+          message: 'Login realizado com sucesso!',
+          type: 'success',
+        });
 
-          return response;
-        }),
-        catchError((error) => {
-          this.toastService.show({
-            message: error.error.message,
-            type: 'error',
-          });
+        return response;
+      }),
+      catchError((error) => {
+        this.toastService.show({
+          message: error.error.message,
+          type: 'error',
+        });
 
-          return throwError(error);
-        }),
-      );
+        return throwError(error);
+      }),
+    );
   }
 
   revalidate(): Observable<any> {
     return this.httpClient.patch(`${this.serverUrl}/revalidate`, {}).pipe(
       map((response: any) => {
-        this.tokenSubject.next(response.access_token);
+        this.tokenSubject.next(response.accessToken);
         this.userSubject.next(response.user);
-        this.setLocalStorage(response.access_token, response.user);
+        this.setLocalStorage(response.accessToken, response.user);
 
         return response;
       }),
