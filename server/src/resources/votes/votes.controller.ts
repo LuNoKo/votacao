@@ -10,7 +10,7 @@ import { ApiHeader, ApiTags } from '@nestjs/swagger';
 import { authorizationToLoginPayload } from 'src/common/utils/base64converter';
 
 @ApiTags('votes')
-@Controller('votes')
+@Controller({ path: 'votes', version: '1' })
 export class VotesController {
   constructor(private readonly votesService: VotesService) {}
 

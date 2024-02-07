@@ -16,7 +16,7 @@ import { ToastService } from '../toast/toast.service';
   providedIn: 'root',
 })
 export class UsersService {
-  private serverUrlForUser = `${environment.serverUrl}/user`;
+  private serverUrlForUser = `${environment.serverUrlV1}/user`;
 
   userTypeDescriber = [
     { userType: 'ADMIN', describe: 'Administrador' },
@@ -25,7 +25,7 @@ export class UsersService {
 
   constructor(
     private httpClient: HttpClient,
-    private toastService: ToastService
+    private toastService: ToastService,
   ) {}
 
   createUser(user: CreateUser) {
@@ -45,7 +45,7 @@ export class UsersService {
         });
 
         return throwError(error);
-      })
+      }),
     );
   }
 
@@ -68,7 +68,7 @@ export class UsersService {
           });
 
           return throwError(error);
-        })
+        }),
       );
   }
 
@@ -99,7 +99,7 @@ export class UsersService {
           });
 
           return throwError(error);
-        })
+        }),
       );
   }
 
@@ -122,7 +122,7 @@ export class UsersService {
           });
 
           return throwError(error);
-        })
+        }),
       );
   }
 

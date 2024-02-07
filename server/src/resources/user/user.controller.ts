@@ -24,7 +24,7 @@ import { ApiHeader, ApiTags } from '@nestjs/swagger';
 import { authorizationToLoginPayload } from '../../common/utils/base64converter';
 
 @ApiTags('user')
-@Controller('user')
+@Controller({ path: 'user', version: '1' })
 export class UserController {
   constructor(private readonly userService: UserService) {}
 

@@ -10,7 +10,7 @@ import { ToastService } from '../toast/toast.service';
   providedIn: 'root',
 })
 export class SubjectsService {
-  private serverUrlForSubject = `${environment.serverUrl}/subject`;
+  private serverUrlForSubject = `${environment.serverUrlV1}/subject`;
 
   private allCategories = [
     { value: 'GAMES', description: 'Jogos' },
@@ -22,7 +22,7 @@ export class SubjectsService {
 
   constructor(
     private httpClient: HttpClient,
-    private toastService: ToastService
+    private toastService: ToastService,
   ) {}
 
   createSubject(subject: Subject) {
@@ -44,7 +44,7 @@ export class SubjectsService {
           });
 
           return throwError(error);
-        })
+        }),
       );
   }
 
@@ -54,7 +54,7 @@ export class SubjectsService {
 
   getOneSubjectById(id: string) {
     return this.httpClient.get<SubjectWithId>(
-      `${this.serverUrlForSubject}/${id}`
+      `${this.serverUrlForSubject}/${id}`,
     );
   }
 

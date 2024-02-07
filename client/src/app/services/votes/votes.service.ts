@@ -9,11 +9,11 @@ import { ToastService } from '../toast/toast.service';
   providedIn: 'root',
 })
 export class VotesService {
-  private serverUrl = `${environment.serverUrl}/votes`;
+  private serverUrl = `${environment.serverUrlV1}/votes`;
 
   constructor(
     private httpClient: HttpClient,
-    private toastService: ToastService
+    private toastService: ToastService,
   ) {}
 
   createVote(subjectId: string, answer: boolean): Observable<Vote> {
@@ -38,19 +38,19 @@ export class VotesService {
           });
 
           return throwError(error);
-        })
+        }),
       );
   }
 
   HasUserVotedBySubject(subjectId: string): Observable<boolean> {
     return this.httpClient.get<boolean>(
-      `${this.serverUrl}/hasUserVotedBySubject/${subjectId}`
+      `${this.serverUrl}/hasUserVotedBySubject/${subjectId}`,
     );
   }
 
   getResult(subjectId: string): Observable<VoteResult> {
     return this.httpClient.get<VoteResult>(
-      `${this.serverUrl}/result/${subjectId}`
+      `${this.serverUrl}/result/${subjectId}`,
     );
   }
 }

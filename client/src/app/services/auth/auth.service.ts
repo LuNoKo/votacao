@@ -8,7 +8,7 @@ import { ToastService } from '../toast/toast.service';
   providedIn: 'root',
 })
 export class AuthService {
-  private serverUrl = `${environment.serverUrl}`;
+  private serverUrl = `${environment.serverUrlV1}`;
 
   private tokenSubject = new BehaviorSubject<string>('');
   private userSubject = new BehaviorSubject<any>(null);
@@ -18,7 +18,7 @@ export class AuthService {
 
   constructor(
     private httpClient: HttpClient,
-    private readonly toastService: ToastService
+    private readonly toastService: ToastService,
   ) {
     this.initialize();
   }
@@ -74,7 +74,7 @@ export class AuthService {
           });
 
           return throwError(error);
-        })
+        }),
       );
   }
 
@@ -99,7 +99,7 @@ export class AuthService {
           this.removeLocalStorage();
         }
         return throwError(error);
-      })
+      }),
     );
   }
 

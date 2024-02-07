@@ -17,7 +17,7 @@ import { UserTypeEnum } from '../user/enum/userType.enum';
 import { Roles } from 'src/common/decorators/roles.decorator';
 
 @ApiTags('subject')
-@Controller('subject')
+@Controller({ path: 'subject', version: '1' })
 export class SubjectController {
   constructor(private readonly subjectService: SubjectService) {}
 
