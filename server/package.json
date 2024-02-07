@@ -1,5 +1,5 @@
 {
-  "name": "votacao-server",
+  "name": "@votacao/votacao-server",
   "version": "0.0.0",
   "private": true,
   "scripts": {

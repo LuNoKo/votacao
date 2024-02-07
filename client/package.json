@@ -1,9 +1,9 @@
 {
-  "name": "votacao-client",
+  "name": "@votacao/votacao-client",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "dev": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"

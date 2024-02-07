@@ -3,9 +3,15 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "concurrently \"npm run dev -w @votacao/votacao-server\" \"npm run dev -w @votacao/votacao-client\""
   },
+  "workspaces": [
+    "client",
+    "server"
+  ],
   "author": "Lucas Nolon Kochenburger",
   "license": "ISC",
-  "dependencies": {}
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
 }
