@@ -6,6 +6,8 @@ import { UsersComponent } from './pages/users/users.component';
 import { AuthAdminGuard } from './guards/auth/auth-admin.guard';
 import { SubjectComponent } from './pages/subject/subject.component';
 import { CreateSubjectComponent } from './pages/create-subject/create-subject.component';
+import { UserChangePasswordComponent } from './pages/user-change-password/user-change-password.component';
+import { UserEditComponent } from './pages/user-edit/user-edit.component';
 
 export const routes: Routes = [
   {
@@ -27,6 +29,16 @@ export const routes: Routes = [
   {
     path: 'users',
     component: UsersComponent,
+    canActivate: [AuthAdminGuard],
+  },
+  {
+    path: 'users/changePassword/:id',
+    component: UserChangePasswordComponent,
+    canActivate: [AuthAdminGuard],
+  },
+  {
+    path: 'users/edit/:id',
+    component: UserEditComponent,
     canActivate: [AuthAdminGuard],
   },
 ];

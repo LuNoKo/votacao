@@ -19,7 +19,7 @@ import { UpdateUserDto } from './dto/updateUser.dto';
 import { UpdateUserPasswordDto } from './dto/updateUserPassword.dto';
 
 import { ReturnAllUserDto } from './dto/returnAllUsers.dto';
-import { RegisterUserDto } from './dto/RegisterUserDto.dto';
+import { RegisterUserDto } from './dto/registerUserDto.dto';
 import { ApiHeader, ApiTags } from '@nestjs/swagger';
 import { authorizationToLoginPayload } from '../../../common/utils/base64converter';
 import { Roles } from '../../../common/decorators/roles.decorator';
@@ -62,8 +62,8 @@ export class UserController {
   @ApiHeader(authorizationToLoginPayload)
   async GetOneUserById(
     @Param(':userId') userId: string,
-  ): Promise<ReturnUserDto> {
-    return new ReturnUserDto(await this.userService.GetOneUserById(userId));
+  ): Promise<ReturnAllUserDto> {
+    return new ReturnAllUserDto(await this.userService.GetOneUserById(userId));
   }
 
   @Put('/:userId')

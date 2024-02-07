@@ -4,6 +4,11 @@ export type User = {
   type: 'ADMIN' | 'USER';
 };
 
+export type UserEdited = {
+  name: string;
+  type: 'ADMIN' | 'USER';
+};
+
 export type AllUsers = {
   id: string;
   name: string;
@@ -30,4 +35,4 @@ export type UpdatePasswordUser = {
   newPassword: string;
 };
 
-export type UserTypes = { userType: string; describe: string };
+export type UserType = { value: string; description: string };

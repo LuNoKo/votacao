@@ -7,9 +7,10 @@ import {
   RegisterUser,
   UpdatePasswordUser,
   User,
-  UserTypes,
+  UserEdited,
+  UserType,
 } from '../../models/User';
-import { catchError, map, throwError } from 'rxjs';
+import { Observable, catchError, map, of, throwError } from 'rxjs';
 import { ToastService } from '../toast/toast.service';
 
 @Injectable({
@@ -19,8 +20,8 @@ export class UsersService {
   private serverUrlForUser = `${environment.serverUrlV1}/user`;
 
   userTypeDescriber = [
-    { userType: 'ADMIN', describe: 'Administrador' },
-    { userType: 'USER', describe: 'Usuário' },
+    { value: 'ADMIN', description: 'Administrador' },
+    { value: 'USER', description: 'Usuário' },
   ];
 
   constructor(
@@ -77,10 +78,10 @@ export class UsersService {
   }
 
   getOneUserById(id: string) {
-    return this.httpClient.get<User>(`${this.serverUrlForUser}/${id}`);
+    return this.httpClient.get<AllUsers>(`${this.serverUrlForUser}/${id}`);
   }
 
-  updateUser(id: string, user: User) {
+  updateUser(id: string, user: UserEdited) {
     return this.httpClient
       .put<User>(`${this.serverUrlForUser}/${id}`, user)
       .pipe(
@@ -126,7 +127,7 @@ export class UsersService {
       );
   }
 
-  getUserTypes(): UserTypes[] {
-    return this.userTypeDescriber;
+  getUserTypes(): Observable<UserType[]> {
+    return of(this.userTypeDescriber);
   }
 }

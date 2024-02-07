@@ -12,14 +12,6 @@ export class UpdateUserDto {
   name: string;
 
   @ApiProperty({
-    example: '896.425.900-93',
-    description: 'CPF é utilizado para realizar autenticação na aplicação',
-  })
-  @IsNotEmpty()
-  @IsString()
-  cpf: string;
-
-  @ApiProperty({
     example: UserTypeEnum.ADMIN,
     description: 'Typo de usuário podendo ser administador ou usuario',
     enum: UserTypeEnum,

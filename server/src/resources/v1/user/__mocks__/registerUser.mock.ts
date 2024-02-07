@@ -1,4 +1,4 @@
-import { RegisterUserDto } from '../dto/RegisterUserDto.dto';
+import { RegisterUserDto } from '../dto/registerUserDto.dto';
 
 export const registerUserMock: RegisterUserDto = {
   name: 'Test Name',

@@ -11,7 +11,7 @@ import { Repository } from 'typeorm';
 import { UpdateUserPasswordDto } from './dto/updateUserPassword.dto';
 import { UpdateUserDto } from './dto/updateUser.dto';
 
-import { RegisterUserDto } from './dto/RegisterUserDto.dto';
+import { RegisterUserDto } from './dto/registerUserDto.dto';
 import { UserTypeEnum } from './enum/userType.enum';
 import {
   createPasswordHashed,

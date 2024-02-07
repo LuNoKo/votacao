@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { AllUsers, UserTypes } from '../../models/User';
+import { AllUsers } from '../../models/User';
 import { UsersService } from '../../services/users/users.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterModule } from '@angular/router';
@@ -13,11 +13,6 @@ import { RouterLink, RouterModule } from '@angular/router';
 })
 export class UsersActionsButtonsComponent {
   @Input() user: AllUsers = {} as AllUsers;
-  userTypeDescriber: UserTypes[] = [];
 
   constructor(private usersService: UsersService) {}
-
-  ngOnInit() {
-    this.userTypeDescriber = this.usersService.getUserTypes();
-  }
 }

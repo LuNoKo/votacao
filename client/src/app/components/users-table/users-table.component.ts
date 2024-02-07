@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { UsersService } from '../../services/users/users.service';
-import { AllUsers, User, UserTypes } from '../../models/User';
+import { AllUsers, UserType } from '../../models/User';
 import { UsersActionsButtonsComponent } from '../users-actions-buttons/users-actions-buttons.component';
 
 @Component({
@@ -13,7 +13,7 @@ import { UsersActionsButtonsComponent } from '../users-actions-buttons/users-act
 })
 export class UsersTableComponent {
   allUsers: AllUsers[] = [];
-  userTypeDescriber: UserTypes[] = [];
+  userTypeDescriber: UserType[] = [];
 
   constructor(private usersService: UsersService) {}
 
@@ -22,16 +22,18 @@ export class UsersTableComponent {
       this.allUsers = response;
     });
 
-    this.userTypeDescriber = this.usersService.getUserTypes();
+    this.usersService.getUserTypes().subscribe((response) => {
+      this.userTypeDescriber = response;
+    });
   }
 
   getUserTypeDescription(userType: string) {
     const userTypeEntry = this.userTypeDescriber?.find(
-      (entry) => entry.userType === userType
+      (entry) => entry.value === userType,
     );
 
     if (userTypeEntry) {
-      return userTypeEntry.describe;
+      return userTypeEntry.description;
     } else {
       return 'Tipo de usuário desconhecido';
     }
