@@ -21,9 +21,9 @@ import { UpdateUserPasswordDto } from './dto/updateUserPassword.dto';
 import { ReturnAllUserDto } from './dto/returnAllUsers.dto';
 import { RegisterUserDto } from './dto/RegisterUserDto.dto';
 import { ApiHeader, ApiTags } from '@nestjs/swagger';
-import { authorizationToLoginPayload } from 'src/common/utils/base64converter';
-import { Roles } from 'src/common/decorators/roles.decorator';
-import { UserId } from 'src/common/decorators/userId.decorator';
+import { authorizationToLoginPayload } from '../../../common/utils/base64converter';
+import { Roles } from '../../../common/decorators/roles.decorator';
+import { UserId } from '../../../common/decorators/userId.decorator';
 
 @ApiTags('user')
 @Controller({ path: 'user', version: '1' })

@@ -5,9 +5,9 @@ import { ReturnVoteDto } from './dto/returnVote.dto';
 import { UserTypeEnum } from '../user/enum/userType.enum';
 import { ReturnVoteResultDto } from './dto/returnVoteResult.dto';
 import { ApiHeader, ApiTags } from '@nestjs/swagger';
-import { authorizationToLoginPayload } from 'src/common/utils/base64converter';
-import { Roles } from 'src/common/decorators/roles.decorator';
-import { UserId } from 'src/common/decorators/userId.decorator';
+import { authorizationToLoginPayload } from '../../../common/utils/base64converter';
+import { Roles } from '../../../common/decorators/roles.decorator';
+import { UserId } from '../../../common/decorators/userId.decorator';
 
 @ApiTags('votes')
 @Controller({ path: 'votes', version: '1' })

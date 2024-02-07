@@ -57,7 +57,7 @@ describe('SubjectService', () => {
 
     it('should return empty array in GetAllSubjects', async () => {
       jest.spyOn(subjectRepository, 'find').mockRejectedValue(new Error());
-      expect(await service.GetAllSubjects()).rejects.toThrow(new Error());
+      expect(service.GetAllSubjects()).rejects.toThrow(new Error());
     });
   });
 

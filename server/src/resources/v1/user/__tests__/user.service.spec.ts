@@ -11,7 +11,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { createUserMock } from '../__mocks__/createUser.mock';
-import { returnDeleteMock } from '../../__mocks__/returnDete.mock';
+import { returnDeleteMock } from '../../../__mocks__/returnDete.mock';
 import { updateUserEntityMock } from '../__mocks__/updateUser.mock';
 import {
   updatePasswordInvalidMock,

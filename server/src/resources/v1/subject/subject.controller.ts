@@ -12,9 +12,9 @@ import { CreateSubjectDto } from './dto/createSubject.dto';
 import { ReturnSubjectDto } from './dto/returnSubject.dto';
 import { ReturnSubjectWithVotesDto } from './dto/returnSubjectWithVotes.dto';
 import { ApiHeader, ApiTags } from '@nestjs/swagger';
-import { authorizationToLoginPayload } from 'src/common/utils/base64converter';
+import { authorizationToLoginPayload } from '../../../common/utils/base64converter';
 import { UserTypeEnum } from '../user/enum/userType.enum';
-import { Roles } from 'src/common/decorators/roles.decorator';
+import { Roles } from '../../../common/decorators/roles.decorator';
 
 @ApiTags('subject')
 @Controller({ path: 'subject', version: '1' })

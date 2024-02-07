@@ -16,7 +16,7 @@ import { UserTypeEnum } from './enum/userType.enum';
 import {
   createPasswordHashed,
   validatePassword,
-} from 'src/common/utils/password';
+} from '../../../common/utils/password';
 
 @Injectable()
 export class UserService {
