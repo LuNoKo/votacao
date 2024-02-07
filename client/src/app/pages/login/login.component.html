@@ -26,12 +26,16 @@
             required
           />
           <label
-            *ngIf="
-              loginForm.get('cpf')?.errors?.['required'] && formDir.submitted
-            "
+            *ngIf="loginForm.get('cpf')?.errors && formDir.submitted"
             class="text-danger"
           >
-            <small>Campo Obrigatório!</small>
+            <small>
+              @if (loginForm.get("cpf")?.errors?.["cpf"]) {
+                Campo Obrigatório!
+              } @else if (loginForm.get("cpf")?.errors?.["invalidCpf"]) {
+                CPF Inválido
+              }
+            </small>
           </label>
         </div>
         <div class="mb-3">

@@ -10,6 +10,7 @@ import {
 import { Router, RouterLink } from '@angular/router';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { AuthService } from '../../../app/services/auth/auth.service';
+import { CustomValidatorsDirective } from '../../validators/CustomValidators';
 
 @Component({
   selector: 'app-login',
@@ -25,12 +26,15 @@ export class LoginComponent {
   constructor(
     public formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
-      cpf: new FormControl('', [Validators.required]),
+      cpf: new FormControl('', [
+        Validators.required,
+        CustomValidatorsDirective.CpfValidator,
+      ]),
       password: new FormControl('', [Validators.required]),
     });
   }

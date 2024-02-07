@@ -10,6 +10,7 @@ import {
 import { Router } from '@angular/router';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { UsersService } from '../../services/users/users.service';
+import { CustomValidatorsDirective } from '../../validators/CustomValidators';
 
 @Component({
   selector: 'app-register',
@@ -25,13 +26,16 @@ export class RegisterComponent {
   constructor(
     public formBuilder: FormBuilder,
     private router: Router,
-    private userService: UsersService
+    private userService: UsersService,
   ) {}
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
-      cpf: new FormControl('', [Validators.required]),
+      cpf: new FormControl('', [
+        Validators.required,
+        CustomValidatorsDirective.CpfValidator,
+      ]),
       password: new FormControl('', [Validators.required]),
     });
   }

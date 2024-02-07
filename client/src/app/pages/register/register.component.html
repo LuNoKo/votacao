@@ -25,7 +25,10 @@
             require
           />
           <label
-            *ngIf="registerForm.get('name')?.errors?.['required'] &&  formDir.submitted"
+            *ngIf="
+              registerForm.get('name')?.errors?.['required'] &&
+              formDir.submitted
+            "
             class="text-danger"
           >
             <small>Campo Obrigatório!</small>
@@ -41,10 +44,16 @@
             required
           />
           <label
-            *ngIf="registerForm.get('name')?.errors?.['required'] &&  formDir.submitted"
+            *ngIf="registerForm.get('cpf')?.errors && formDir.submitted"
             class="text-danger"
           >
-            <small>Campo Obrigatório!</small>
+            <small>
+              @if (registerForm.get("cpf")?.errors?.["cpf"]) {
+                Campo Obrigatório!
+              } @else if (registerForm.get("cpf")?.errors?.["invalidCpf"]) {
+                CPF Inválido
+              }
+            </small>
           </label>
         </div>
         <div class="mb-4">
@@ -56,7 +65,10 @@
             required
           />
           <label
-            *ngIf="registerForm.get('name')?.errors?.['required'] &&  formDir.submitted"
+            *ngIf="
+              registerForm.get('name')?.errors?.['required'] &&
+              formDir.submitted
+            "
             class="text-danger"
           >
             <small>Campo Obrigatório!</small>
