@@ -1,0 +1,23 @@
+<div class="toast-container postion-fixed bottom-0 end-0 p-3">
+  <div
+    [ngClass]="{
+      show: this.toastMessage.show,
+      'text-bg-success': this.toastMessage.type === 'success',
+      'text-bg-danger': this.toastMessage.type === 'error'
+    }"
+    class="toast align-items-center border-0 fade"
+    role="alert"
+    aria-live="assertive"
+    aria-atomic="true"
+  >
+    <div class="d-flex">
+      <div class="toast-body">{{ this.toastMessage.message }}</div>
+      <button
+        type="button"
+        class="btn-close btn-close-white me-2 m-auto"
+        data-bs-dismiss="toast"
+        aria-label="Close"
+      ></button>
+    </div>
+  </div>
+</div>

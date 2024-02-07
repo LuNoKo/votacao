@@ -33,9 +33,6 @@ export class LoginComponent {
       cpf: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
     });
-
-    this.dadosForm['cpf'].setValue('02621539041');
-    this.dadosForm['password'].setValue('teste');
   }
 
   get dadosForm() {
@@ -50,32 +47,7 @@ export class LoginComponent {
           next: (response) => {
             this.router.navigate(['/']);
           },
-          error: (error) => {
-            alert(error);
-          },
         });
     }
   }
-
-  // getErrorMessage(controlName: string): string {
-  //   const control = this.loginForm.get(controlName);
-  //   if (control && control.errors && 'serverError' in control.errors) {
-  //     return control.errors['serverError'];
-  //   }
-  //   return '';
-  // }
-
-  // private handleServerError(error: any) {
-  //   const errors = error?.error?.message;
-
-  //   if (errors && Array.isArray(errors)) {
-  //     errors.forEach((err) => {
-  //       const control = this.loginForm.get(err.path);
-
-  //       if (control) {
-  //         control.setErrors({ serverError: err.message });
-  //       }
-  //     });
-  //   }
-  // }
 }

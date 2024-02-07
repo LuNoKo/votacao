@@ -57,9 +57,6 @@ export class CreateSubjectComponent {
           next: (response) => {
             this.router.navigate(['/']);
           },
-          error: (error) => {
-            alert(error);
-          },
         });
     }
   }

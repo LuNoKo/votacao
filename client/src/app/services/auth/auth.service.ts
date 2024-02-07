@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environment/environment';
 import { BehaviorSubject, Observable, catchError, map, throwError } from 'rxjs';
+import { ToastService } from '../toast/toast.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,10 @@ export class AuthService {
   jwtTokenKey = 'voteAqui/token';
   userKey = 'voteAqui/user';
 
-  constructor(private httpClient: HttpClient) {
+  constructor(
+    private httpClient: HttpClient,
+    private readonly toastService: ToastService
+  ) {
     this.initialize();
   }
 
@@ -56,11 +60,19 @@ export class AuthService {
           this.tokenSubject.next(response.accessToken);
           this.userSubject.next(response.user);
 
-          console.log('Login realizado com sucesso!');
+          this.toastService.show({
+            message: 'Login realizado com sucesso!',
+            type: 'success',
+          });
 
           return response;
         }),
         catchError((error) => {
+          this.toastService.show({
+            message: error.error.message,
+            type: 'error',
+          });
+
           return throwError(error);
         })
       );
@@ -79,7 +91,10 @@ export class AuthService {
         if (error.status === 401) {
           this.handleSessionExpiration();
         } else {
-          console.log('Erro ao revalidar a sessão');
+          this.toastService.show({
+            message: 'Erro ao revalidar a sessão!',
+            type: 'error',
+          });
 
           this.removeLocalStorage();
         }
@@ -93,14 +108,21 @@ export class AuthService {
     this.tokenSubject.next('');
     this.userSubject.next(null);
 
-    console.log('Logout realizado com sucesso!');
+    this.toastService.show({
+      message: 'Logout realizado com sucesso!',
+      type: 'success',
+    });
   }
 
   private handleSessionExpiration() {
     this.removeLocalStorage();
     this.tokenSubject.next('');
     this.userSubject.next(null);
-    console.log('Sessão expirada');
+
+    this.toastService.show({
+      message: 'Sessão expirada',
+      type: 'error',
+    });
   }
 
   setLocalStorage(tokenValue: string, user: any) {

@@ -86,9 +86,6 @@ export class SubjectComponent {
       next: (response) => {
         this.router.navigate(['/']);
       },
-      error: (error) => {
-        alert(error);
-      },
     });
   }
 }

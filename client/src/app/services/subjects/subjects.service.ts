@@ -4,6 +4,7 @@ import { environment } from '../../../environment/environment';
 import { Subject, SubjectWithId } from '../../models/Subject';
 import { Observable, catchError, map, of, throwError } from 'rxjs';
 import { Category } from '../../models/Category';
+import { ToastService } from '../toast/toast.service';
 
 @Injectable({
   providedIn: 'root',
@@ -19,16 +20,29 @@ export class SubjectsService {
     { value: 'EDUCATION', description: 'Educação' },
   ];
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(
+    private httpClient: HttpClient,
+    private toastService: ToastService
+  ) {}
 
   createSubject(subject: Subject) {
     return this.httpClient
       .post<Subject>(this.serverUrlForSubject, subject)
       .pipe(
         map((response) => {
+          this.toastService.show({
+            message: 'Pauta criada com sucesso!',
+            type: 'success',
+          });
+
           return response;
         }),
         catchError((error) => {
+          this.toastService.show({
+            message: error.error.message,
+            type: 'error',
+          });
+
           return throwError(error);
         })
       );
@@ -41,12 +55,6 @@ export class SubjectsService {
   getOneSubjectById(id: string) {
     return this.httpClient.get<SubjectWithId>(
       `${this.serverUrlForSubject}/${id}`
-    );
-  }
-
-  getAllVotesBySubject(id: string) {
-    return this.httpClient.get<Subject>(
-      `${this.serverUrlForSubject}/allVotes/${id}`
     );
   }
 
