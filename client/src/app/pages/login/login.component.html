@@ -26,7 +26,9 @@
             required
           />
           <label
-            *ngIf="loginForm.get('cpf')?.errors?.['required'] &&  formDir.submitted"
+            *ngIf="
+              loginForm.get('cpf')?.errors?.['required'] && formDir.submitted
+            "
             class="text-danger"
           >
             <small>Campo Obrigatório!</small>
@@ -41,23 +43,14 @@
             required
           />
           <label
-            *ngIf="loginForm.get('password')?.errors?.['required'] &&  formDir.submitted"
+            *ngIf="
+              loginForm.get('password')?.errors?.['required'] &&
+              formDir.submitted
+            "
             class="text-danger"
           >
             <small>Campo Obrigatório!</small>
           </label>
-        </div>
-        <div class="mb-3">
-          <div class="form-check">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              id="dropdownCheck"
-            />
-            <label class="form-check-label" for="dropdownCheck">
-              Remember me
-            </label>
-          </div>
         </div>
         <div class="mb-3 d-flex justify-content-center">
           <small>
