@@ -10,12 +10,13 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UpdateUserPasswordDto } from './dto/updateUserPassword.dto';
 import { UpdateUserDto } from './dto/updateUser.dto';
+
+import { RegisterUserDto } from './dto/RegisterUserDto.dto';
+import { UserTypeEnum } from './enum/userType.enum';
 import {
   createPasswordHashed,
   validatePassword,
-} from '../../common/utils/password';
-import { RegisterUserDto } from './dto/RegisterUserDto.dto';
-import { UserTypeEnum } from './enum/userType.enum';
+} from 'src/common/utils/password';
 
 @Injectable()
 export class UserService {

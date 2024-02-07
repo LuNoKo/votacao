@@ -2,12 +2,12 @@ import { Body, Controller, Get, Head, Param, Post } from '@nestjs/common';
 import { VotesService } from './votes.service';
 import { CreateVoteDto } from './dto/createVote.dto';
 import { ReturnVoteDto } from './dto/returnVote.dto';
-import { Roles } from '../../common/decorators/roles.decorator';
 import { UserTypeEnum } from '../user/enum/userType.enum';
-import { UserId } from '../../common/decorators/userId.decorator';
 import { ReturnVoteResultDto } from './dto/returnVoteResult.dto';
 import { ApiHeader, ApiTags } from '@nestjs/swagger';
 import { authorizationToLoginPayload } from 'src/common/utils/base64converter';
+import { Roles } from 'src/common/decorators/roles.decorator';
+import { UserId } from 'src/common/decorators/userId.decorator';
 
 @ApiTags('votes')
 @Controller({ path: 'votes', version: '1' })

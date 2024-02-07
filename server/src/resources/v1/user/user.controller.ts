@@ -13,15 +13,17 @@ import {
 import { CreateUserDto } from './dto/createUser.dto';
 import { UserService } from './user.service';
 import { ReturnUserDto } from './dto/returnUser.dto';
-import { Roles } from '../../common/decorators/roles.decorator';
+
 import { UserTypeEnum } from './enum/userType.enum';
 import { UpdateUserDto } from './dto/updateUser.dto';
 import { UpdateUserPasswordDto } from './dto/updateUserPassword.dto';
-import { UserId } from '../../common/decorators/userId.decorator';
+
 import { ReturnAllUserDto } from './dto/returnAllUsers.dto';
 import { RegisterUserDto } from './dto/RegisterUserDto.dto';
 import { ApiHeader, ApiTags } from '@nestjs/swagger';
-import { authorizationToLoginPayload } from '../../common/utils/base64converter';
+import { authorizationToLoginPayload } from 'src/common/utils/base64converter';
+import { Roles } from 'src/common/decorators/roles.decorator';
+import { UserId } from 'src/common/decorators/userId.decorator';
 
 @ApiTags('user')
 @Controller({ path: 'user', version: '1' })
