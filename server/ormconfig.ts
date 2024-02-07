@@ -2,11 +2,11 @@ import { DataSource } from 'typeorm';
 
 export const connectionSource = new DataSource({
   type: 'postgres',
-  host: 'localhost',
-  port: 5432,
-  username: 'votacao',
-  password: 'votacao',
-  database: 'votacao',
+  database: process.env.DB_NAME || 'votacao',
+  host: process.env.DB_HOST || 'localhost',
+  username: process.env.DB_USER || 'votacao',
+  password: process.env.DB_PASSWORD || 'votacao',
+  port: Number(process.env.DB_PORT) || 5432,
   entities: [`${__dirname}/**/*.entity{.js,.ts}`],
   migrations: [`${__dirname}/src/migrations/{*.ts,*.js}`],
 });

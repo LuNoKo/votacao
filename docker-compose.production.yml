@@ -1,0 +1,38 @@
+version: "3.8"
+services:
+  votacao-db:
+    container_name: votacao-db
+    image: postgres:16-alpine
+    restart: always
+    volumes:
+      - votacao-db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=votacao
+      - POSTGRES_PASSWORD=votacao
+      - POSTGRES_DB=votacao
+    ports:
+      - "5432:5432"
+  votacao-server:
+    container_name: votacao-server
+    build: ./server
+    restart: "always"
+    volumes:
+      - .:/app
+    links:
+      - votacao-db
+    depends_on:
+      - votacao-db
+    ports:
+      - "3000:3000"
+  votacao-client:
+    container_name: votacao-client
+    build: ./client
+    restart: "always"
+    volumes:
+      - .:/app
+    depends_on:
+      - votacao-server
+    ports:
+      - "8080:80"
+volumes:
+  votacao-db:

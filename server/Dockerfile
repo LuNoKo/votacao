@@ -1,7 +1,5 @@
 FROM node:20.11.0-alpine
 
-WORKDIR /usr/src/votacao-server
-
 COPY . .
 COPY ./.env.production ./.env
 
