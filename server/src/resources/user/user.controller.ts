@@ -20,12 +20,16 @@ import { UpdateUserPasswordDto } from './dto/updateUserPassword.dto';
 import { UserId } from '../../common/decorators/userId.decorator';
 import { ReturnAllUserDto } from './dto/returnAllUsers.dto';
 import { RegisterUserDto } from './dto/RegisterUserDto.dto';
+import { ApiHeader, ApiTags } from '@nestjs/swagger';
+import { authorizationToLoginPayload } from '../../common/utils/base64converter';
 
+@ApiTags('user')
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
+  @ApiHeader(authorizationToLoginPayload)
   @Roles(UserTypeEnum.ADMIN)
   @UsePipes(ValidationPipe)
   async CreateUser(@Body() createUser: CreateUserDto): Promise<ReturnUserDto> {
@@ -44,6 +48,7 @@ export class UserController {
 
   @Get()
   @Roles(UserTypeEnum.ADMIN)
+  @ApiHeader(authorizationToLoginPayload)
   async GetAllUsers(): Promise<ReturnAllUserDto[]> {
     return (await this.userService.GetAllUsers()).map(
       (userEntity) => new ReturnAllUserDto(userEntity),
@@ -52,6 +57,7 @@ export class UserController {
 
   @Get(':userId')
   @Roles(UserTypeEnum.ADMIN)
+  @ApiHeader(authorizationToLoginPayload)
   async GetOneUserById(
     @Param(':userId') userId: string,
   ): Promise<ReturnUserDto> {
@@ -61,6 +67,7 @@ export class UserController {
   @Put('/:userId')
   @Roles(UserTypeEnum.ADMIN)
   @UsePipes(ValidationPipe)
+  @ApiHeader(authorizationToLoginPayload)
   async UpdateUser(
     @Body() updateUser: UpdateUserDto,
     @Param('userId') userId: string,
@@ -73,6 +80,7 @@ export class UserController {
   @Patch()
   @Roles(UserTypeEnum.ADMIN)
   @UsePipes(ValidationPipe)
+  @ApiHeader(authorizationToLoginPayload)
   async UpdatePasswordUser(
     @Body() updateUserPassword: UpdateUserPasswordDto,
     @UserId() userId: string,
@@ -84,6 +92,7 @@ export class UserController {
 
   @Delete('/:userId')
   @Roles(UserTypeEnum.ADMIN)
+  @ApiHeader(authorizationToLoginPayload)
   async delete(@Param('userId') userId: string) {
     return this.userService.delete(userId);
   }

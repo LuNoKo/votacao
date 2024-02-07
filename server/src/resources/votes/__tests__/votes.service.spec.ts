@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { expect } from '@jest/globals';
 import { VotesService } from '../votes.service';
 import { VotesEntity } from '../entity/votes.entity';
 import { Repository } from 'typeorm';

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Head, Param, Post } from '@nestjs/common';
 import { VotesService } from './votes.service';
 import { CreateVoteDto } from './dto/createVote.dto';
 import { ReturnVoteDto } from './dto/returnVote.dto';
@@ -6,13 +6,17 @@ import { Roles } from '../../common/decorators/roles.decorator';
 import { UserTypeEnum } from '../user/enum/userType.enum';
 import { UserId } from '../../common/decorators/userId.decorator';
 import { ReturnVoteResultDto } from './dto/returnVoteResult.dto';
+import { ApiHeader, ApiTags } from '@nestjs/swagger';
+import { authorizationToLoginPayload } from 'src/common/utils/base64converter';
 
+@ApiTags('votes')
 @Controller('votes')
 export class VotesController {
   constructor(private readonly votesService: VotesService) {}
 
   @Post()
   @Roles(UserTypeEnum.ADMIN, UserTypeEnum.USER)
+  @ApiHeader(authorizationToLoginPayload)
   async CreateVote(
     @Body() createVote: CreateVoteDto,
     @UserId() userId: string,
@@ -23,6 +27,7 @@ export class VotesController {
   }
 
   @Get('hasUserVotedBySubject/:subjectId')
+  @ApiHeader(authorizationToLoginPayload)
   async HasUserVotedBySubject(
     @Param('subjectId') subjectId: string,
     @UserId() userId: string,

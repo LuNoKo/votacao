@@ -1,4 +1,4 @@
-import { UserEntity } from 'src/resources/user/entity/user.entity';
+import { UserEntity } from '../../user/entity/user.entity';
 
 export class LoginPayloadDto {
   id: string;

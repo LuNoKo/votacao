@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { expect } from '@jest/globals';
 import { SubjectService } from '../subject.service';
 import { SubjectEntity } from '../entity/subject.entity';
 import { subjectEntityMock } from '../__mocks__/subject.mock';
@@ -6,7 +7,6 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { NotFoundException } from '@nestjs/common';
 
-//npm run test ./src/resources/subject/test/subject.service.spec.ts
 describe('SubjectService', () => {
   let service: SubjectService;
   let subjectRepository: Repository<SubjectEntity>;

@@ -1,4 +1,4 @@
-import { ReturnVoteDto } from 'src/resources/votes/dto/returnVote.dto';
+import { ReturnVoteDto } from '../../votes/dto/returnVote.dto';
 import { SubjectEntity } from '../entity/subject.entity';
 import { SubjectCategoryEnum } from '../enum/SubjectCategoryEnum.enum';
 

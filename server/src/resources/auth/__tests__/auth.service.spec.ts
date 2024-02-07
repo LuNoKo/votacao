@@ -1,6 +1,6 @@
 import { JwtService } from '@nestjs/jwt';
+import { expect } from '@jest/globals';
 import { Test, TestingModule } from '@nestjs/testing';
-import { ReturnUserDto } from '../../user/dto/returnUser.dto';
 import { UserService } from '../../user/user.service';
 import { userEntityMock } from '../../user/__mocks__/user.mocks';
 import { AuthService } from '../auth.service';

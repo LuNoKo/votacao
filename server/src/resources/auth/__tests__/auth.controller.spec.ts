@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { expect } from '@jest/globals';
 import { AuthController } from '../auth.controller';
 import { AuthService } from '../auth.service';
 import { loginMock } from '../__mocks__/login.mock';

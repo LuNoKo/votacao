@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { expect } from '@jest/globals';
 import { SubjectController } from '../subject.controller';
 import { SubjectService } from '../subject.service';
 import { createSubjecMock } from '../__mocks__/createSubject.mock';

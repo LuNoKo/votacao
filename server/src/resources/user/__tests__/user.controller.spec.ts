@@ -1,3 +1,4 @@
+import { expect } from '@jest/globals';
 import { Test, TestingModule } from '@nestjs/testing';
 import { UserController } from '../user.controller';
 import { UserService } from '../user.service';
@@ -6,7 +7,6 @@ import { userEntityMock } from '../__mocks__/user.mocks';
 import { updateUserEntityMock } from '../__mocks__/updateUser.mock';
 import { updatePasswordMock } from '../__mocks__/updateUserPassword.mock';
 
-//npm run test ./src/resources/user/test/user.controller.spec.ts
 describe('UserController', () => {
   let userController: UserController;
   let userService: UserService;

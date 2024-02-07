@@ -1,4 +1,4 @@
-import { voteEntityMock } from 'src/resources/votes/__mocks__/vote.mock';
+import { voteEntityMock } from '../../votes/__mocks__/vote.mock';
 import { SubjectEntity } from '../entity/subject.entity';
 import { SubjectCategoryEnum } from '../enum/SubjectCategoryEnum.enum';
 
