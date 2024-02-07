@@ -25,6 +25,7 @@ export type RegisterUser = {
 };
 
 export type UpdatePasswordUser = {
+  userId: string;
   lastPassword: string;
   newPassword: string;
 };

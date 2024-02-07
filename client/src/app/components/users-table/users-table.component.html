@@ -12,7 +12,7 @@
         <td>{{ user.name }}</td>
         <td>{{ getUserTypeDescription(user.type) }}</td>
         <td>
-          <app-users-actions-buttons></app-users-actions-buttons>
+          <app-users-actions-buttons [user]="user"></app-users-actions-buttons>
         </td>
       </tr>
     </tbody>

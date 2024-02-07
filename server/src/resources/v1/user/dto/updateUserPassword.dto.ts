@@ -3,9 +3,18 @@ import { IsNotEmpty, IsString } from 'class-validator';
 
 export class UpdateUserPasswordDto {
   @ApiProperty({
+    example: '00000000-0000-0000-0000-000000000000',
+    description:
+      'UserId  utilizado identificar qual usuário deverá ser realizado a alteração da senha',
+  })
+  @IsNotEmpty()
+  @IsString()
+  userId: string;
+
+  @ApiProperty({
     example: '00000',
     description:
-      'LastPassword é a seha anterior utilizada para realizar autenticação na aplicação',
+      'LastPassword é a senha anterior utilizada para realizar autenticação na aplicação',
   })
   @IsNotEmpty()
   @IsString()
@@ -14,7 +23,7 @@ export class UpdateUserPasswordDto {
   @ApiProperty({
     example: '12345',
     description:
-      'NewPassword é a seha nova para realizar autenticação na aplicação',
+      'NewPassword é a senha nova para realizar autenticação na aplicação',
   })
   @IsNotEmpty()
   @IsString()

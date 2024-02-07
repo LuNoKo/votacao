@@ -85,10 +85,9 @@ export class UserController {
   @ApiHeader(authorizationToLoginPayload)
   async UpdatePasswordUser(
     @Body() updateUserPassword: UpdateUserPasswordDto,
-    @UserId() userId: string,
   ): Promise<ReturnUserDto> {
     return new ReturnUserDto(
-      await this.userService.UpdatePasswordUser(updateUserPassword, userId),
+      await this.userService.UpdatePasswordUser(updateUserPassword),
     );
   }
 

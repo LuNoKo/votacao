@@ -2,14 +2,14 @@
   <button
     type="button"
     class="btn btn-secondary m-1 my-md-0"
-    routerLink="/users/changePassword"
+    [routerLink]="['/users/changePassword', this.user.id]"
   >
     <i class="fa-solid fa-key"></i>
   </button>
   <button
     type="button"
     class="btn btn-primary m-1 my-md-0"
-    routerLink="/users/edit"
+    [routerLink]="['/users/edit', user.id]"
   >
     <i class="fa-solid fa-pen-to-square"></i>
   </button>

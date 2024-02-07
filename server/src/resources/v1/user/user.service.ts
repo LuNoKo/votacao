@@ -117,9 +117,8 @@ export class UserService {
 
   async UpdatePasswordUser(
     updatePasswordDTO: UpdateUserPasswordDto,
-    userId: string,
   ): Promise<UserEntity> {
-    const user = await this.GetOneUserById(userId);
+    const user = await this.GetOneUserById(updatePasswordDTO.userId);
 
     const passwordHashed = await createPasswordHashed(
       updatePasswordDTO.newPassword,
