@@ -73,6 +73,29 @@ export class UsersService {
       );
   }
 
+  deleteUser(userId: string) {
+    return this.httpClient
+      .delete<any>(`${this.serverUrlForUser}/${userId}`)
+      .pipe(
+        map((response) => {
+          this.toastService.show({
+            message: 'Usuário deletado com sucesso!',
+            type: 'success',
+          });
+
+          return response;
+        }),
+        catchError((error) => {
+          this.toastService.show({
+            message: error.error.message,
+            type: 'error',
+          });
+
+          return throwError(error);
+        }),
+      );
+  }
+
   getAllUsers() {
     return this.httpClient.get<AllUsers[]>(this.serverUrlForUser);
   }
