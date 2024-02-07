@@ -1,5 +1,3 @@
-import { CreateCollectionOptions } from 'typeorm';
-import { UserEntity } from '../entity/user.entity';
 import { UserTypeEnum } from '../enum/userType.enum';
 import { CreateUserDto } from '../dto/createUser.dto';
 

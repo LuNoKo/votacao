@@ -95,6 +95,6 @@ export class UserController {
   @Roles(UserTypeEnum.ADMIN)
   @ApiHeader(authorizationToLoginPayload)
   async delete(@Param('userId') userId: string) {
-    return this.userService.delete(userId);
+    return !!(await this.userService.delete(userId));
   }
 }

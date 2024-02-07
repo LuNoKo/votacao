@@ -11,7 +11,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { createUserMock } from '../__mocks__/createUser.mock';
-import { returnDeleteMock } from '../../../__mocks__/returnDete.mock';
+import { returnDeleteMock } from '../../../__mocks__/returnDelete.mock';
 import { updateUserEntityMock } from '../__mocks__/updateUser.mock';
 import {
   updatePasswordInvalidMock,
@@ -34,6 +34,7 @@ describe('UserService', () => {
             findOne: jest.fn().mockResolvedValue(userEntityMock),
             save: jest.fn().mockResolvedValue(userEntityMock),
             delete: jest.fn().mockResolvedValue(returnDeleteMock),
+            count: jest.fn().mockResolvedValue(1),
           },
         },
       ],
@@ -155,29 +156,23 @@ describe('UserService', () => {
 
   describe('UpdateUserPassword', () => {
     it('should return user in UpdateUserPassword', async () => {
-      const user = await service.UpdatePasswordUser(
-        updatePasswordMock,
-        userEntityMock.id,
-      );
+      const user = await service.UpdatePasswordUser(updatePasswordMock);
 
       expect(user).toEqual(userEntityMock);
     });
 
     it('should return invalid password in error in UpdateUserPassword', async () => {
       expect(
-        service.UpdatePasswordUser(
-          updatePasswordInvalidMock,
-          userEntityMock.id,
-        ),
+        service.UpdatePasswordUser(updatePasswordInvalidMock),
       ).rejects.toThrow(new BadRequestException('Ultima senha inválida'));
     });
 
     it('should return error in user not exist', async () => {
       jest.spyOn(userRepository, 'findOne').mockResolvedValue(null);
 
-      expect(
-        service.UpdatePasswordUser(updatePasswordMock, userEntityMock.id),
-      ).rejects.toThrow(new NotFoundException('Usuário não encontrado'));
+      expect(service.UpdatePasswordUser(updatePasswordMock)).rejects.toThrow(
+        new NotFoundException('Usuário não encontrado'),
+      );
     });
   });
 

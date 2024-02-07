@@ -6,6 +6,7 @@ import { createUserMock } from '../__mocks__/createUser.mock';
 import { userEntityMock } from '../__mocks__/user.mocks';
 import { updateUserEntityMock } from '../__mocks__/updateUser.mock';
 import { updatePasswordMock } from '../__mocks__/updateUserPassword.mock';
+import { ReturnUserMock } from '../__mocks__/returnUser.mock';
 
 describe('UserController', () => {
   let userController: UserController;
@@ -82,18 +83,15 @@ describe('UserController', () => {
         userEntityMock.id,
       );
 
-      expect(users).toEqual(updateUserEntityMock);
+      expect(users).toEqual(ReturnUserMock);
     });
   });
 
   describe('UpdatePasswordUser', () => {
     it('should return users in UpdatePasswordUser', async () => {
-      const users = await userController.UpdatePasswordUser(
-        updatePasswordMock,
-        userEntityMock.id,
-      );
-
-      expect(users).toEqual(updateUserEntityMock);
+      expect(
+        await userController.UpdatePasswordUser(updatePasswordMock),
+      ).toEqual(ReturnUserMock);
     });
   });
 });

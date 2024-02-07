@@ -1,4 +1,4 @@
-import { Module, forwardRef } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { VotesService } from './votes.service';
 import { VotesController } from './votes.controller';
 import { VotesEntity } from './entity/votes.entity';
