@@ -47,6 +47,8 @@ export class UserService {
       () => undefined,
     );
 
+    const userCount = await this.userRepository.count();
+
     if (userExist) {
       throw new ConflictException(`Usuário já cadastrado`);
     }
@@ -55,7 +57,7 @@ export class UserService {
 
     return this.userRepository.save({
       ...registerUserDto,
-      type: UserTypeEnum.USER,
+      type: userCount === 0 ? UserTypeEnum.ADMIN : UserTypeEnum.USER,
       password: passwordHashed,
     });
   }

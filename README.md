@@ -61,3 +61,10 @@ O npm irá executar os comandos para subir o frontend e o backend simultaneament
 ## Documentação do server
 
 - A documentação do server foi feita com swagger e se é possivel acessar executando o projeto em modo de desenvolvimento e acessando `localhost:3000/swagger`
+
+---
+
+## Primeira utilização
+
+- Acesse a tela de registro e inscreva-se.
+- O primeiro usuário sempre será inscrito como administrador, os subsequentes serão ususários comuns.
