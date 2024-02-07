@@ -9,7 +9,6 @@ import { ToastService } from '../../services/toast/toast.service';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './toast.component.html',
-  styleUrl: './toast.component.css',
 })
 export class ToastComponent implements OnDestroy {
   toastMessage: ToastMessage;
@@ -21,7 +20,7 @@ export class ToastComponent implements OnDestroy {
     this.subscription = this.toastService.toastState.subscribe(
       (state: ToastMessage) => {
         this.toastMessage = state;
-      }
+      },
     );
   }
 

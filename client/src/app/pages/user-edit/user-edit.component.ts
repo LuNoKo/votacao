@@ -15,7 +15,6 @@ import { AllUsers, User, UserType } from '../../models/User';
   standalone: true,
   imports: [CommonModule, RouterLink, ReactiveFormsModule],
   templateUrl: './user-edit.component.html',
-  styleUrl: './user-edit.component.css',
 })
 export class UserEditComponent {
   constructor(
@@ -61,7 +60,7 @@ export class UserEditComponent {
           type: this.dadosForm['type'].value,
         })
         .subscribe({
-          next: (response) => {
+          next: () => {
             this.router.navigate(['/']);
           },
         });

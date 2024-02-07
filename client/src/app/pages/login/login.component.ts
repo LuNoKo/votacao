@@ -10,7 +10,7 @@ import {
 import { Router, RouterLink } from '@angular/router';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { AuthService } from '../../../app/services/auth/auth.service';
-import { CustomValidatorsDirective } from '../../validators/CustomValidators';
+import { CustomValidatorsDirective } from '../../directives/CustomValidators';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +18,6 @@ import { CustomValidatorsDirective } from '../../validators/CustomValidators';
   providers: [provideNgxMask()],
   imports: [RouterLink, CommonModule, ReactiveFormsModule, NgxMaskDirective],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
 })
 export class LoginComponent {
   loginForm!: FormGroup;

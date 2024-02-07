@@ -6,6 +6,5 @@ import { UsersTableComponent } from '../../components/users-table/users-table.co
   standalone: true,
   imports: [UsersTableComponent],
   templateUrl: './users.component.html',
-  styleUrl: './users.component.css',
 })
 export class UsersComponent {}

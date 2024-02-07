@@ -13,7 +13,6 @@ import { SubjectResultComponent } from '../../components/subject-result/subject-
   standalone: true,
   imports: [CommonModule, RouterLink, SubjectResultComponent],
   templateUrl: './subject.component.html',
-  styleUrl: './subject.component.css',
 })
 export class SubjectComponent {
   subject: SubjectWithId = {} as SubjectWithId;
@@ -27,7 +26,7 @@ export class SubjectComponent {
     private router: Router,
     private subjectsService: SubjectsService,
     private authService: AuthService,
-    private votesService: VotesService
+    private votesService: VotesService,
   ) {}
 
   ngOnInit() {
@@ -39,7 +38,7 @@ export class SubjectComponent {
         this.activateUntilTranslated = formatDate(
           new Date(this.subject.activeUntil),
           'dd/MM/yyyy HH:mm',
-          'pt-BR'
+          'pt-BR',
         );
 
         if (this.authService.isUserAuthenticated()) {
@@ -67,7 +66,7 @@ export class SubjectComponent {
 
   getCategoryDescription(categoryType: string) {
     const category = this.allCategories?.find(
-      (entry) => entry.value === categoryType
+      (entry) => entry.value === categoryType,
     );
 
     if (category) {

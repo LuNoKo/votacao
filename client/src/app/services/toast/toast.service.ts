@@ -1,5 +1,4 @@
-import { Injectable, ViewChild } from '@angular/core';
-import { Toast } from 'bootstrap';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 export interface ToastMessage {

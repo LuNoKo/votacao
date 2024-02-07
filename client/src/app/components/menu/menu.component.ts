@@ -8,12 +8,14 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule, RouterLink, RouterLinkActive],
   templateUrl: './menu.component.html',
-  styleUrl: './menu.component.css',
 })
 export class MenuComponent {
-  public navbarCollapsed = false;
+  navbarCollapsed = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+  ) {}
 
   get showAdminComponents() {
     return this.authService.isAdmin();

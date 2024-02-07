@@ -9,7 +9,6 @@ import { UsersActionsButtonsComponent } from '../users-actions-buttons/users-act
   standalone: true,
   imports: [CommonModule, UsersActionsButtonsComponent],
   templateUrl: './users-table.component.html',
-  styleUrl: './users-table.component.css',
 })
 export class UsersTableComponent {
   allUsers: AllUsers[] = [];

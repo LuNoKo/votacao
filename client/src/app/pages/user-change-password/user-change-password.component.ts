@@ -14,7 +14,6 @@ import { UsersService } from '../../services/users/users.service';
   standalone: true,
   imports: [CommonModule, RouterLink, ReactiveFormsModule],
   templateUrl: './user-change-password.component.html',
-  styleUrl: './user-change-password.component.css',
 })
 export class UserChangePasswordComponent {
   constructor(

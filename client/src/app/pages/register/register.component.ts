@@ -10,7 +10,7 @@ import {
 import { Router } from '@angular/router';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { UsersService } from '../../services/users/users.service';
-import { CustomValidatorsDirective } from '../../validators/CustomValidators';
+import { CustomValidatorsDirective } from '../../directives/CustomValidators';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +18,6 @@ import { CustomValidatorsDirective } from '../../validators/CustomValidators';
   providers: [provideNgxMask()],
   imports: [CommonModule, ReactiveFormsModule, NgxMaskDirective],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css',
 })
 export class RegisterComponent {
   registerForm!: FormGroup;

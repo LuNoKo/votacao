@@ -15,7 +15,6 @@ import { Category } from '../../models/Category';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './create-subject.component.html',
-  styleUrl: './create-subject.component.css',
 })
 export class CreateSubjectComponent {
   subjectForm!: FormGroup;
@@ -23,7 +22,7 @@ export class CreateSubjectComponent {
 
   constructor(
     private router: Router,
-    private subjectsService: SubjectsService
+    private subjectsService: SubjectsService,
   ) {
     this.subjectForm = new FormGroup({
       title: new FormControl('', [Validators.required]),
@@ -50,7 +49,7 @@ export class CreateSubjectComponent {
           description: this.dadosForm['description'].value,
           category: this.dadosForm['category'].value,
           activeUntil: new Date(
-            this.dadosForm['activeUntil'].value
+            this.dadosForm['activeUntil'].value,
           ).toISOString(),
         })
         .subscribe({

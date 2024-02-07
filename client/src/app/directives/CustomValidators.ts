@@ -3,7 +3,6 @@ import {
   AbstractControl,
   NG_VALIDATORS,
   ValidationErrors,
-  Validator,
 } from '@angular/forms';
 
 @Directive({
@@ -16,11 +15,7 @@ import {
     },
   ],
 })
-export class CustomValidatorsDirective implements Validator {
-  validate(controle: AbstractControl): ValidationErrors | null {
-    return { teste: true };
-  }
-
+export class CustomValidatorsDirective {
   static CpfValidator(control: AbstractControl): ValidationErrors | null {
     const cpf = control.value;
 

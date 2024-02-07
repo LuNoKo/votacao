@@ -15,7 +15,6 @@ registerLocaleData(localePt, 'pt');
   imports: [CommonModule, RouterLink],
   providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css',
 })
 export class HomeComponent {
   allSubjects: SubjectWithId[] = [];
@@ -24,7 +23,7 @@ export class HomeComponent {
 
   constructor(
     private authService: AuthService,
-    private subjectsService: SubjectsService
+    private subjectsService: SubjectsService,
   ) {}
 
   ngOnInit() {
@@ -53,13 +52,13 @@ export class HomeComponent {
     const value = (e.target as HTMLInputElement).value;
 
     this.subjects = this.allSubjects.filter((subject) =>
-      subject.category.includes(value)
+      subject.category.includes(value),
     );
   }
 
   getCategoryDescription(categoryType: string) {
     const category = this.allCategories?.find(
-      (entry) => entry.value === categoryType
+      (entry) => entry.value === categoryType,
     );
 
     if (category) {
