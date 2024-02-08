@@ -26,7 +26,10 @@
             required
           />
           <label
-            *ngIf="subjectForm.get('title')?.errors?.['required'] &&  formDir.submitted"
+            *ngIf="
+              subjectForm.get('title')?.errors?.['required'] &&
+              formDir.submitted
+            "
             class="text-danger"
           >
             <small>Campo Obrigatório!</small>
@@ -43,7 +46,10 @@
             required
           ></textarea>
           <label
-            *ngIf="subjectForm.get('description')?.errors?.['required'] &&  formDir.submitted"
+            *ngIf="
+              subjectForm.get('description')?.errors?.['required'] &&
+              formDir.submitted
+            "
             class="text-danger"
           >
             <small>Campo Obrigatório!</small>
@@ -61,7 +67,10 @@
             </option>
           </select>
           <label
-            *ngIf="subjectForm.get('category')?.errors?.['required'] &&  formDir.submitted"
+            *ngIf="
+              subjectForm.get('category')?.errors?.['required'] &&
+              formDir.submitted
+            "
             class="text-danger"
           >
             <small>Campo Obrigatório!</small>
@@ -76,10 +85,29 @@
             required
           />
           <label
-            *ngIf="subjectForm.get('activeUntil')?.errors?.['required'] &&  formDir.submitted"
+            *ngIf="
+              subjectForm.get('activeUntil')?.errors?.['required'] &&
+              formDir.submitted
+            "
             class="text-danger"
           >
             <small>Campo Obrigatório!</small>
+          </label>
+          <label
+            *ngIf="subjectForm.get('activeUntil')?.errors && formDir.submitted"
+            class="text-danger"
+          >
+            <small>
+              @if (subjectForm.get("activeUntil")?.errors?.["required"]) {
+                Campo Obrigatório!
+              } @else if (
+                subjectForm.get("activeUntil")?.errors?.[
+                  "InvalidMinDateIsToday"
+                ]
+              ) {
+                A data não pode ser menor que hoje
+              }
+            </small>
           </label>
         </div>
 

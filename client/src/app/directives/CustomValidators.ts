@@ -50,4 +50,14 @@ export class CustomValidatorsDirective {
     if (resto != parseInt(cpf.substring(10, 11))) return { invalidCpf: true };
     return null;
   }
+
+  static MinDateIsTodayValidator(
+    control: AbstractControl,
+  ): ValidationErrors | null {
+    if (new Date(control.value) > new Date()) {
+      return null;
+    }
+
+    return { InvalidMinDateIsToday: true };
+  }
 }

@@ -9,6 +9,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Category } from '../../models/Category';
+import { CustomValidatorsDirective } from '../../directives/CustomValidators';
 
 @Component({
   selector: 'app-create-subject',
@@ -28,7 +29,10 @@ export class CreateSubjectComponent {
       title: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
       category: new FormControl('', [Validators.required]),
-      activeUntil: new FormControl('', [Validators.required]),
+      activeUntil: new FormControl('', [
+        Validators.required,
+        CustomValidatorsDirective.MinDateIsTodayValidator,
+      ]),
     });
   }
   ngOnInit() {
