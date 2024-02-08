@@ -11,7 +11,7 @@ Projeto realizado para um processo seletivo, para verificar o escopo do projeto 
 - Na raiz do projeto instale as depentencias:
 
   ```bash
-  npm install
+  npm install --prefix .\client\
   ```
 
 - Acesse o a pasta `/server` e crie um arquivo `/server/.env`, existe um exemplo dentro da pasta.

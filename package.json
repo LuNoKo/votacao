@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"npm run dev -w @votacao/votacao-server\" \"npm run dev -w @votacao/votacao-client\""
+    "dev": "concurrently \"npm run dev -w @votacao/votacao-server\" \"npm run dev -w @votacao/votacao-client\"",
+    "build": "concurrently \"npm run build -w @votacao/votacao-server\" \"npm run build -w @votacao/votacao-client\""
   },
   "workspaces": [
     "client",
